@@ -17,10 +17,84 @@
             color: #111;
         }
 
-        .container {
-            width: 1100px;
-            max-width: calc(100% - 30px);
-            margin: 30px auto;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #fff;
+            border-right: 1px solid #ddd;
+            padding: 30px 20px;
+        }
+
+        .profile-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    overflow: hidden;
+    border: 2px solid #e5e7eb;
+    background: #fff;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+        .teacher-name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu button,
+        .menu a,
+        .menu .disabled-link {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            background: #e5e7eb;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .menu button.active {
+            background: #111;
+            color: #fff;
+        }
+
+        .menu .disabled-link {
+            background: #f1f5f9;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .content {
+            flex: 1;
+            padding: 30px;
         }
 
         .topbar {
@@ -30,57 +104,53 @@
             margin-bottom: 20px;
         }
 
-        h1 {
+        .topbar h1 {
             font-size: 28px;
         }
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tab-btn {
-            padding: 10px 16px;
-            border: none;
-            background: #e5e7eb;
-            cursor: pointer;
-            border-radius: 8px;
+        .back-link {
+            color: #2563eb;
             font-weight: 600;
         }
 
-        .tab-btn.active {
-            background: #111;
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
+        .message {
+            background: #dcfce7;
+            color: #166534;
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 18px;
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06);
         }
 
-        .card h3 {
-            margin-bottom: 10px;
+        .tab-panel {
+            display: none;
         }
 
-        .item {
-            border-top: 1px solid #eee;
-            padding: 12px 0;
+        .tab-panel.active {
+            display: block;
         }
 
-        .item:first-child {
-            border-top: none;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background: #f9fafb;
+            font-size: 14px;
         }
 
         .status-pending {
@@ -94,125 +164,166 @@
         }
 
         .btn {
-            margin-top: 8px;
-            padding: 10px 14px;
+            padding: 8px 12px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            background: #111;
-            color: white;
             font-weight: 600;
         }
 
-        .message {
-            background: #dcfce7;
-            color: #166534;
-            padding: 12px;
+        .btn-approve {
+            background: #111;
+            color: #fff;
+        }
+
+        .btn-delete {
+            background: #dc2626;
+            color: #fff;
+        }
+
+        .btn-view {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            padding: 8px 12px;
             border-radius: 8px;
-            margin-bottom: 16px;
+            font-weight: 600;
         }
 
         .empty {
+            text-align: center;
+            padding: 30px;
             color: #666;
         }
 
-        .course-title {
-            font-size: 20px;
-            margin-bottom: 8px;
+        .action-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
-        .meta {
-            color: #555;
-            margin-bottom: 5px;
+        form {
+            display: inline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="topbar">
-            <h1>Trang Teacher</h1>
-            <a href="{{ route('courses.index') }}">Quay lại khóa học</a>
-        </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="profile-box">
+                <div class="avatar">
+                    <img src="{{ asset('images/teacher.webp') }}" alt="avatar">
+                </div>
+                <div class="teacher-name">{{ auth()->user()->name }}</div>
+            </div>
 
-        @if(session('success'))
-            <div class="message">{{ session('success') }}</div>
-        @endif
+            <div class="menu">
+                <button class="tab-btn active" onclick="showTab('tab1', this)">Yêu cầu vào học</button>
+                <button class="tab-btn" onclick="showTab('tab2', this)">Thống kê khóa học</button>
+                <div class="disabled-link">Thành viên khóa học</div>
+            </div>
+        </aside>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('tab1', this)">Yêu cầu xin vào học</button>
-            <button class="tab-btn" onclick="showTab('tab2', this)">Khóa học của tôi</button>
-        </div>
+        <main class="content">
+            <div class="topbar">
+                <h1>Quản lý giảng viên</h1>
+                <a href="{{ route('courses.index') }}" class="back-link">Quay lại khóa học</a>
+            </div>
 
-        <div id="tab1" class="tab-content active">
-            @if($requests->count() > 0)
-                @foreach($requests as $request)
-                    <div class="card">
-                        <h3>{{ $request->course->title }}</h3>
-                        <div class="meta"><strong>Học viên:</strong> {{ $request->user->name }}</div>
-                        <div class="meta"><strong>Email:</strong> {{ $request->user->email }}</div>
-                        <div class="meta">
-                            <strong>Trạng thái:</strong>
-                            @if($request->approved)
-                                <span class="status-approved">Đã duyệt</span>
-                            @else
-                                <span class="status-pending">Chưa duyệt</span>
-                            @endif
-                        </div>
-
-                        @if(!$request->approved)
-                            <form action="{{ route('teacher.approve', $request->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn">Duyệt vào học</button>
-                            </form>
-                        @endif
-                    </div>
-                @endforeach
-            @else
-                <div class="card empty">Chưa có yêu cầu xin vào học nào.</div>
+            @if(session('success'))
+                <div class="message">{{ session('success') }}</div>
             @endif
-        </div>
 
-        <div id="tab2" class="tab-content">
-            @if($courses->count() > 0)
-                @foreach($courses as $course)
-                    <div class="card">
-                        <div class="course-title">{{ $course->title }}</div>
-                        <div class="meta"><strong>Nội dung:</strong> {{ $course->content }}</div>
-                        <div class="meta"><strong>Giá:</strong> {{ $course->price }}</div>
-
-                        <div style="margin-top: 12px;">
-                            <strong>Danh sách người đăng ký:</strong>
-                        </div>
-
-                        @if($course->courseUsers->count() > 0)
-                            @foreach($course->courseUsers as $item)
-                                <div class="item">
-                                    <div><strong>Tên:</strong> {{ $item->user->name }}</div>
-                                    <div><strong>Email:</strong> {{ $item->user->email }}</div>
-                                    <div>
-                                        <strong>Trạng thái:</strong>
-                                        @if($item->approved)
+            <div id="tab1" class="tab-panel active">
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên khóa học</th>
+                                <th>Tên người xin vào</th>
+                                <th>Trạng thái</th>
+                                <th>Duyệt</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($requests as $index => $request)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $request->course->title }}</td>
+                                    <td>{{ $request->user->name }}</td>
+                                    <td>
+                                        @if($request->status === 'approved')
                                             <span class="status-approved">Đã duyệt</span>
                                         @else
                                             <span class="status-pending">Chưa duyệt</span>
                                         @endif
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <div class="item empty">Chưa có ai đăng ký khóa học này.</div>
-                        @endif
-                    </div>
-                @endforeach
-            @else
-                <div class="card empty">Bạn chưa tạo khóa học nào.</div>
-            @endif
-        </div>
+                                    </td>
+                                    <td>
+                                        @if($request->status === 'pending')
+                                            <form action="{{ route('teacher.approve', $request->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-approve">Duyệt</button>
+                                            </form>
+                                        @else
+                                            <span>Đã duyệt</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('teacher.request.destroy', $request->id) }}" method="POST" onsubmit="return confirm('Xóa yêu cầu này?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-delete">Xóa</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="empty">Chưa có yêu cầu xin vào học nào.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tab2" class="tab-panel">
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên khóa học</th>
+                                <th>Số thành viên</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($courses as $index => $course)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $course->title }}</td>
+                                    <td>{{ $course->approved_members_count }}</td>
+                                    <td>
+                                        <a href="{{ route('teacher.members', $course->id) }}" class="btn-view">Xem thành viên</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="empty">Bạn chưa có khóa học nào.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
         function showTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
+            document.querySelectorAll('.tab-panel').forEach(tab => {
                 tab.classList.remove('active');
             });
 

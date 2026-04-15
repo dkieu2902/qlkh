@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Điều khoản - TechSchool</title>
@@ -131,6 +133,66 @@
         .highlight {
             font-weight: 700;
         }
+                .user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #3498db;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dropdown {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 160px;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.dropdown a,
+.dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.dropdown a:hover,
+.dropdown button:hover {
+    background: #f2f2f2;
+}
+.dark-mode{
+            background: rgb(247, 240, 240);
+            width: 2.7rem;
+            height: 2.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+        }
+        .dark-mode ion-icon{
+            color: #111;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -148,8 +210,33 @@
             </div>
 
             <div class="nav-right">
-                <div class="avatar">D</div>
-                <div class="theme-btn">☀</div>
+                <div class="user-menu">
+    <div class="avatar" onclick="toggleMenu()">
+        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+    </div>
+
+    <div id="dropdownMenu" class="dropdown">
+        <a href="
+            @if(auth()->user()->role === 'user')
+                {{ route('student.dashboard') }}
+            @elseif(auth()->user()->role === 'admin')
+                {{ route('teacher.dashboard') }}
+            @else
+                #
+            @endif
+        ">
+            Thông tin cá nhân
+        </a>
+
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Đăng xuất</button>
+        </form>
+    </div>
+</div>
+                                <div class="dark-mode">
+                    <ion-icon name="moon-outline"></ion-icon>
+                </div>
             </div>
         </div>
     </div>
@@ -201,6 +288,18 @@
             <span class="highlight">support@techschool.com</span>
         </p>
     </div>
+   <script>
+function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
 
+// click ra ngoài thì ẩn menu
+window.onclick = function(e) {
+    if (!e.target.closest('.user-menu')) {
+        document.getElementById('dropdownMenu').style.display = 'none';
+    }
+}
+</script>
 </body>
 </html>

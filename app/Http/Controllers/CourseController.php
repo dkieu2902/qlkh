@@ -10,10 +10,13 @@ use App\Models\CourseUser;
 class CourseController extends Controller
 {
     public function index()
-    {
-        $courses = Course::latest()->get();
-        return view('components.courses.course_list', compact('courses'));
-    }
+{
+    $courses = Course::with(['courseUsers' => function ($query) {
+        $query->where('user_id', auth()->id());
+    }])->latest()->get();
+
+    return view('components.courses.course_list', compact('courses'));
+}
 
     public function create()
     {
@@ -117,24 +120,29 @@ class CourseController extends Controller
         return view('components.courses.show', compact('course'));
     }
 
-    public function register($id)
-    {
-        CourseUser::create([
-            'user_id' => auth()->id(),
-            'course_id' => $id,
-            'approved' => false
-        ]);
+public function register($id)
+{
+    $exists = CourseUser::where('user_id', auth()->id())
+        ->where('course_id', $id)
+        ->first();
 
-        return back()->with('success', 'Đã gửi yêu cầu, chờ admin duyệt');
+    if ($exists) {
+        if ($exists->status === 'pending') {
+            return back()->with('success', 'Bạn đang đợi duyệt khóa học này.');
+        }
 
+        if ($exists->status === 'approved') {
+            return back()->with('success', 'Bạn đã được duyệt vào khóa học này.');
+        }
     }
 
-    public function approve($id)
-    {
-        $courseUser = CourseUser::find($id);
-        $courseUser->approved = true;
-        $courseUser->save();
+    CourseUser::create([
+        'user_id' => auth()->id(),
+        'course_id' => $id,
+        'status' => 'pending'
+    ]);
 
-        return back()->with('success', 'Đã duyệt học viên');
-    }
+    return back()->with('success', 'Đã gửi yêu cầu, chờ admin duyệt');
+}
+
 }

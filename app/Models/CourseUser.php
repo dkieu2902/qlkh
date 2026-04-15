@@ -11,7 +11,7 @@ class CourseUser extends Model
     protected $fillable = [
         'user_id',
         'course_id',
-        'approved',
+        'status',
     ];
      public function user()
     {
