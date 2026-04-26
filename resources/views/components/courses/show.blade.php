@@ -295,6 +295,72 @@ td {
             color: #111;
             font-size: 18px;
         }
+        .save-cancel-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.icon-action-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-action-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: #f3f4f6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.icon-action-btn ion-icon {
+    font-size: 24px;
+}
+
+.icon-action-btn.save {
+    color: #16a34a;
+}
+
+.icon-action-btn.cancel {
+    color: #dc2626;
+}
+
+.icon-action-btn:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+.action-tooltip {
+    position: absolute;
+    top: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111827;
+    color: white;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 99999;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+
+.icon-action-wrap:hover .action-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
     </style>
 </head>
 <body>
@@ -311,11 +377,11 @@ td {
 
             <div class="nav-right">
                                 <div class="user-menu">
-    <div class="avatar" onclick="toggleMenu()">
+    <div class="avatar" onclick="toggleUserMenu(event)">
         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
     </div>
 
-    <div id="dropdownMenu" class="dropdown">
+    <div id="dropdownMenu" class="dropdown hidden">
         <a href="
             @if(auth()->user()->role === 'user')
                 {{ route('student.dashboard') }}
@@ -527,13 +593,22 @@ function editVideo(id) {
 
     // đổi action thành LƯU + HỦY
     document.getElementById('action-' + id).innerHTML = `
-        <button onclick="saveVideo(${id})" class="menu-btn" style="color:green">
-            <ion-icon name="save-outline"></ion-icon>
-        </button>
-        <button onclick="cancelEdit(${id})" class="menu-btn" style="color:red">
-            <ion-icon name="log-out-outline"></ion-icon>
-        </button>
-    `;
+    <div class="save-cancel-actions">
+        <div class="icon-action-wrap">
+            <button onclick="saveVideo(${id})" class="icon-action-btn save">
+                <ion-icon name="save-outline"></ion-icon>
+            </button>
+            <div class="action-tooltip">Lưu</div>
+        </div>
+
+        <div class="icon-action-wrap">
+            <button onclick="cancelEdit(${id})" class="icon-action-btn cancel">
+                <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
+            <div class="action-tooltip">Hủy</div>
+        </div>
+    </div>
+`;
 }
 function cancelEdit(id) {
     location.reload();
@@ -582,7 +657,12 @@ function toggleMenu2(e) {
     const menu = document.getElementById('dropdownMenu');
     menu.classList.toggle('hidden');
 }
+function toggleUserMenu(e) {
+    e.stopPropagation();
 
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('hidden');
+}
 
 </script>
 
