@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AIChatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
@@ -48,7 +49,9 @@ Route::middleware(['auth'])->group(function () {
 
     // video khóa học
     Route::post('/courses/{courseId}/videos/store', [VideoController::class, 'store'])->name('videos.store');
-    Route::get('/courses/{courseId}/learn', [VideoController::class, 'learn'])->name('videos.learn');
+    Route::get('/courses/{courseId}/learn', [VideoController::class, 'learn'])
+    ->middleware(['auth', 'approved.course'])
+    ->name('videos.learn');
     Route::get('/courses/{courseId}/videos/{videoId}', [VideoController::class, 'watch'])->name('videos.watch');
     Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('videos.edit');
     Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update');
@@ -68,5 +71,5 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/student', [StudentController::class, 'dashboard'])->name('student.dashboard');
     });
 });
-
+Route::post('/ai-chat', [AIChatController::class, 'chat'])->name('ai.chat');
 require __DIR__.'/auth.php';

@@ -156,6 +156,13 @@
             border: none;
             cursor: pointer;
         }
+        .btn-disabled {
+    background: #9ca3af;
+    color: #e5e7eb;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+}
         input, textarea {
             width: 100%;
             padding: 10px;
@@ -406,6 +413,13 @@ td {
             </div>
         </div>
     </header>
+    @php
+    $isApproved = auth()->check() && \Illuminate\Support\Facades\DB::table('course_user')
+        ->where('user_id', auth()->id())
+        ->where('course_id', $course->id)
+        ->where('status', 'approved')
+        ->exists();
+@endphp
 <div class="container">
     <div class="card">
         <h1>{{ $course->title }}</h1>
@@ -541,7 +555,16 @@ td {
                 <p>Nhận hỏi đáp và hỗ trợ</p>
             </div>
 
-            <a href="{{ route('videos.learn', $course->id) }}" class="btn">Vào học</a>
+@if(auth()->check() && auth()->user()->role === 'admin')
+    <a href="{{ route('videos.learn', $course->id) }}" class="btn">Vào học</a>
+
+@elseif(auth()->check() && auth()->user()->role === 'user')
+    @if($isApproved)
+        <a href="{{ route('videos.learn', $course->id) }}" class="btn">Vào học</a>
+    @else
+        <span class="btn btn-disabled">Vào học</span>
+    @endif
+@endif
         </div>
         <div>
             @if(auth()->check() && auth()->user()->role === 'admin')

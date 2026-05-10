@@ -462,6 +462,7 @@ window.onclick = function(e) {
     }
 }
 </script>
+@include('components.ai-chat')
 </body>
 </html>
 
