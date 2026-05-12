@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TechSchool</title>
+
     <style>
         * {
             margin: 0;
@@ -14,28 +17,42 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #111;
-        }
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: #111827;
+    min-height: 100vh;
+    background: #eef3f8;
+}
 
         a {
             text-decoration: none;
             color: inherit;
         }
 
+        .page-bg {
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(245, 249, 255, 0.65) 0%,
+            rgba(245, 249, 255, 0.75) 52%,
+            #eef3f8 52%,
+            #eef3f8 100%
+        ),
+        url("/images/nen2.jpg") center top / 100% 52% no-repeat;
+}
+
         .navbar {
             width: 100%;
-            height: 76px;
-            border-bottom: 1px solid #d8d8d8;
-            background: #ffffff;
+            height: 74px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .nav-inner {
-            width: 1200px;
+            width: 1180px;
             max-width: calc(100% - 80px);
             display: flex;
             align-items: center;
@@ -43,202 +60,214 @@
         }
 
         .logo {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .dark-mode{
-            background: rgb(247, 240, 240);
-            width: 2.7rem;
-            height: 2.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-
-        }
-        .dark-mode ion-icon{
-            color: #111;
-            font-size: 18px;
+            font-size: 34px;
+            font-weight: 800;
+            color: #075ccf;
         }
 
         .menu {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 22px;
         }
 
         .menu a {
-            font-size: 16px;
-            font-weight: 600;
-            padding: 12px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 12px 20px;
             border-radius: 10px;
             transition: 0.2s;
         }
 
-        .menu a.active {
-            background: #eaeaea;
-        }
-
+        .menu a.active,
         .menu a:hover {
-            background: #eaeaea;
+            background: #d9e9ff;
+            color: #075ccf;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .user-menu {
-    position: relative;
-    display: inline-block;
-}
+            position: relative;
+        }
 
-.avatar {
-    width: 40px;
-    height: 40px;
-    background: #3498db;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.dropdown {
-    position: absolute;
-    right: 0;
-    top: 50px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 160px;
-    display: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.dropdown a,
-.dropdown button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    text-align: left;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.dropdown a:hover,
-.dropdown button:hover {
-    background: #f2f2f2;
-}
-
-        .theme-btn {
+        .avatar {
             width: 38px;
             height: 38px;
+            background: #0875ff;
+            color: #fff;
             border-radius: 50%;
-            border: 1px solid #d0d0d0;
-            background: #f3f3f3;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            font-weight: 800;
         }
 
-        .theme-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: #111;
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 170px;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            z-index: 20;
+            overflow: hidden;
+        }
+
+        .dropdown a,
+        .dropdown button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .dropdown a:hover,
+        .dropdown button:hover {
+            background: #f2f6ff;
+        }
+
+        .dark-mode {
+            background: #06122b;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .dark-mode ion-icon {
+            color: #fff;
+            font-size: 18px;
         }
 
         .hero {
-            width: 100%;
-            padding-top: 110px;
-            padding-bottom: 140px;
-        }
-
-        .hero-inner {
-            width: 1200px;
-            max-width: calc(100% - 80px);
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            text-align: left;
+            text-align: center;
+            padding: 58px 20px 34px;
         }
 
         .hero h1 {
-            font-size: 50px;
-            line-height: 1.04;
-            font-weight: 400;
-            letter-spacing: -1.5px;
-            margin-bottom: 24px;
+            font-size: 46px;
+            line-height: 1.08;
+            font-weight: 900;
+            max-width: 780px;
+            margin: 0 auto 22px;
         }
 
-
+        .hero h1 span {
+            color: #075ce0;
+        }
 
         .hero p {
-            font-size: 19px;
+            font-size: 17px;
             line-height: 1.55;
-            color: #1f1f1f;
             max-width: 760px;
+            margin: 0 auto 26px;
+            color: #111;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 34px;
+            border-radius: 10px;
+            background: #0875ff;
+            color: #fff;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 6px 12px rgba(0, 91, 210, 0.3);
+        }
+
+        .features-wrap {
+            width: 980px;
+            max-width: calc(100% - 40px);
+            margin: 20px auto 70px;
+            background: rgba(255, 255, 255, 0.88);
+            border-radius: 24px;
+            padding: 36px 40px;
+            box-shadow: 0 14px 35px rgba(31, 65, 114, 0.15);
         }
 
         .features {
-            width: 1200px;
-            max-width: calc(100% - 80px);
-            margin: 0 auto 60px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            column-gap: 80px;
-            row-gap: 54px;
+            gap: 42px 58px;
         }
 
         .feature-item {
             display: flex;
+            flex-direction: column;
             align-items: flex-start;
-            gap: 22px;
         }
 
         .feature-icon {
-            width: 42px;
-            min-width: 42px;
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #0875ff, #0052d9);
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 4px;
+            margin-bottom: 16px;
+            box-shadow: 0 6px 12px rgba(0, 91, 210, 0.28);
         }
 
-        .feature-icon svg {
-            width: 34px;
-            height: 34px;
-            stroke: #111;
-            stroke-width: 1.8;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .feature-icon ion-icon {
+            font-size: 30px;
         }
 
         .feature-content h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 8px;
         }
 
         .feature-content p {
-            font-size: 15px;
-            line-height: 1.55;
-            color: #6d7280;
+            font-size: 14.5px;
+            line-height: 1.45;
+            color: #222;
         }
 
-        @media (max-width: 1200px) {
+        .chat-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #0875ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 8px 18px rgba(0, 91, 210, 0.35);
+            z-index: 10;
+        }
+
+        .chat-float ion-icon {
+            font-size: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .menu {
+                display: none;
+            }
+
             .hero h1 {
-                font-size: 56px;
+                font-size: 34px;
             }
 
             .features {
@@ -246,44 +275,29 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .nav-inner {
                 max-width: calc(100% - 30px);
-                gap: 16px;
             }
 
-            .menu {
-                display: none;
-            }
-
-            .hero {
-                padding-top: 70px;
-                padding-bottom: 90px;
-            }
-
-            .hero-inner,
-            .features {
-                max-width: calc(100% - 30px);
-            }
-
-            .hero h1 {
-                font-size: 38px;
-                line-height: 1.15;
-                letter-spacing: -0.5px;
-            }
-
-            .hero p {
-                font-size: 16px;
+            .logo {
+                font-size: 26px;
             }
 
             .features {
                 grid-template-columns: 1fr;
-                gap: 36px;
+            }
+
+            .features-wrap {
+                padding: 28px 24px;
             }
         }
     </style>
 </head>
+
 <body>
+<div class="page-bg">
+
     <header class="navbar">
         <div class="nav-inner">
             <div class="logo">TechSchool</div>
@@ -296,30 +310,31 @@
             </div>
 
             <div class="nav-right">
-<div class="user-menu">
-    <div class="avatar" onclick="toggleMenu()">
-        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-    </div>
+                <div class="user-menu">
+                    <div class="avatar" onclick="toggleMenu()">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
 
-    <div id="dropdownMenu" class="dropdown">
-        <a href="
-            @if(auth()->user()->role === 'user')
-                {{ route('student.dashboard') }}
-            @elseif(auth()->user()->role === 'admin')
-                {{ route('teacher.dashboard') }}
-            @else
-                #
-            @endif
-        ">
-            Thông tin cá nhân
-        </a>
+                    <div id="dropdownMenu" class="dropdown">
+                        <a href="
+                            @if(auth()->user()->role === 'user')
+                                {{ route('student.dashboard') }}
+                            @elseif(auth()->user()->role === 'admin')
+                                {{ route('teacher.dashboard') }}
+                            @else
+                                #
+                            @endif
+                        ">
+                            Thông tin cá nhân
+                        </a>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit">Đăng xuất</button>
-        </form>
-    </div>
-</div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Đăng xuất</button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="dark-mode">
                     <ion-icon name="moon-outline"></ion-icon>
                 </div>
@@ -328,141 +343,101 @@
     </header>
 
     <section class="hero">
-        <div class="hero-inner">
-            <div class="hero-content">
-                <h1>
-                    Nền tảng học lập trình trực tuyến dành cho
-                    <strong>mọi người</strong>
-                </h1>
-                <p>
-                    Nền tảng học lập trình trực tuyến, luyện kỹ năng lập trình qua bài tập,
-                    giảng viên hướng dẫn, các bài viết chuyên sâu và tài liệu học tập dành riêng
-                    cho học viên
-                </p>
+        <h1>
+            <span>Nền tảng học lập trình trực tuyến</span><br>
+            dành cho mọi người
+        </h1>
+
+        <p>
+            Nền tảng học lập trình trực tuyến, luyện kỹ năng lập trình qua bài tập,
+            giảng viên hướng dẫn, các bài viết chuyên sâu và tài liệu học tập dành riêng
+            cho học viên
+        </p>
+
+        <a href="/courses" class="hero-btn">Bắt đầu học miễn phí</a>
+    </section>
+
+    <section class="features-wrap">
+        <div class="features">
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <ion-icon name="videocam"></ion-icon>
+                </div>
+                <div class="feature-content">
+                    <h3>Học online trực tiếp</h3>
+                    <p>Học trực tiếp với giảng viên trên Google Meet, ở bất kỳ nơi đâu, giải đáp thắc mắc nhanh chóng.</p>
+                </div>
             </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <ion-icon name="easel"></ion-icon>
+                </div>
+                <div class="feature-content">
+                    <h3>Xem lại bài giảng</h3>
+                    <p>Đăng nhập và xem lại video bài giảng thuận tiện mọi lúc trên web techschool.vn.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <ion-icon name="code-slash"></ion-icon>
+                </div>
+                <div class="feature-content">
+                    <h3>Làm bài tập và thực hành</h3>
+                    <p>Luyện kỹ năng lập trình thông qua bài tập, giảng viên chấm điểm, đánh giá và hướng dẫn.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <ion-icon name="book-outline"></ion-icon>
+                </div>
+                <div class="feature-content">
+                    <h3>Access tài nguyên</h3>
+                    <p>Truy cập các bài viết chuyên sâu dành riêng cho học viên, tài liệu học tập, api để thực hành...</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>
+                </div>
+                <div class="feature-content">
+                    <h3>Tài nguyên được chứng thực</h3>
+                    <p>Bài viết, video đã được xin phép tác giả, kiểm duyệt và chứng nhận hữu ích bởi đội ngũ TechSchool.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <ion-icon name="globe-outline"></ion-icon>
+                </div>
+                <div class="feature-content">
+                    <h3>Một nơi cho tất cả</h3>
+                    <p>Khoá học thuộc đa dạng lĩnh vực, từ cơ bản đến nâng cao, phù hợp với mọi đối tượng.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section class="features">
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M2 17a9 9 0 0 1 9 9"></path>
-                    <path d="M2 11a15 15 0 0 1 15 15"></path>
-                    <path d="M3 21h.01"></path>
-                    <rect x="14" y="3" width="7" height="18" rx="1.5"></rect>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3>Học online trực tiếp</h3>
-                <p>
-                    Học trực tiếp với giảng viên trên Google Meet, ở bất kỳ nơi đâu,
-                    giải đáp thắc mắc nhanh chóng
-                </p>
-            </div>
-        </div>
+</div>
 
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
-                    <path d="M10 8l5 2.5L10 13z"></path>
-                    <path d="M8 20h8"></path>
-                    <path d="M12 16v4"></path>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3>Xem lại bài giảng</h3>
-                <p>
-                    Đăng nhập và xem lại video bài giảng thuận tiện mọi lúc trên web techschool.vn
-                </p>
-            </div>
-        </div>
-
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M8 8l-4 4 4 4"></path>
-                    <path d="M16 8l4 4-4 4"></path>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3>Làm bài tập và thực hành</h3>
-                <p>
-                    Luyện kỹ năng lập trình thông qua bài tập, giảng viên chấm điểm,
-                    đánh giá và hướng dẫn
-                </p>
-            </div>
-        </div>
-
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path>
-                    <path d="M14 2v5h5"></path>
-                    <path d="M10 13l2 2"></path>
-                    <path d="M10 17h4"></path>
-                    <path d="M10 9h1"></path>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3>Access tài nguyên</h3>
-                <p>
-                    Truy cập các bài viết chuyên sâu dành riêng cho học viên, tài liệu học tập,
-                    api để thực hành...
-                </p>
-            </div>
-        </div>
-
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24">
-                    <rect x="4" y="3" width="16" height="18" rx="2"></rect>
-                    <path d="M9 12l2 2 4-4"></path>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3>Tài nguyên được chứng thực</h3>
-                <p>
-                    Bài viết, video đã được xin phép tác giả, kiểm duyệt và chứng nhận hữu ích
-                    bởi đội ngũ TechSchool, tránh nội dung rác
-                </p>
-            </div>
-        </div>
-
-        <div class="feature-item">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24">
-                    <path d="M7 10v11"></path>
-                    <path d="M12 10v11"></path>
-                    <path d="M17 10v11"></path>
-                    <path d="M2 21h20"></path>
-                    <path d="M7 10c0-2.2 1.8-4 4-4h2c2.8 0 5 2.2 5 5 0 1.6-.8 3-2 3.9"></path>
-                    <path d="M7 10H5a3 3 0 0 1 0-6c1 0 1.8.3 2.4.9"></path>
-                </svg>
-            </div>
-            <div class="feature-content">
-                <h3>Một nơi cho tất cả</h3>
-                <p>
-                    Khoá học thuộc đa dạng lĩnh vực, từ cơ bản đến nâng cao, phù hợp với mọi đối tượng
-                </p>
-            </div>
-        </div>
-    </section>
-    <script>
-function toggleMenu() {
-    const menu = document.getElementById('dropdownMenu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-
-// click ra ngoài thì ẩn menu
-window.onclick = function(e) {
-    if (!e.target.closest('.user-menu')) {
-        document.getElementById('dropdownMenu').style.display = 'none';
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
-}
+
+    window.onclick = function(e) {
+        if (!e.target.closest('.user-menu')) {
+            document.getElementById('dropdownMenu').style.display = 'none';
+        }
+    }
 </script>
+
 @include('components.ai-chat')
 </body>
 </html>
-
