@@ -6,10 +6,11 @@ use App\Models\Course;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class AIChatController extends Controller
 {
-     public function chat(Request $request)
+    public function chat(Request $request)
     {
         $request->validate([
             'message' => 'required|string|max:1000',
@@ -24,7 +25,7 @@ class AIChatController extends Controller
             return [
                 'ten_khoa_hoc' => $course->title,
                 'mo_ta' => $course->content,
-                'gia' => $course->price,
+                'hoc_phi' => number_format($course->price) . ' ₫',
                 'giao_vien' => $course->teacher->name ?? 'Không rõ',
             ];
         })->toArray();
@@ -56,38 +57,67 @@ Hãy trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu.
 ";
 
         $apiKey = config('gemini.api_key');
-        $model = config('gemini.model');
+        $model = config('gemini.model', 'gemini-1.5-flash');
 
-        $response = Http::post(
-            "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}",
-            [
-                'contents' => [
-                    [
-                        'parts' => [
-                            ['text' => $prompt]
+        if (empty($apiKey)) {
+            Log::error('Gemini API key chưa được cấu hình.');
+
+            return response()->json([
+                'reply' => 'Mèo AI hiện chưa được cấu hình. Bạn vui lòng thử lại sau.'
+            ], 200);
+        }
+
+        try {
+$response = Http::timeout(30)
+    ->withHeaders([
+        'Content-Type' => 'application/json',
+    ])
+    ->post(
+        "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}",
+        [
+            'contents' => [
+                [
+                    'parts' => [
+                        [
+                            'text' => $prompt
                         ]
                     ]
                 ]
             ]
-        );
+        ]
+    );
 
-        if (!$response->successful()) {
-    return response()->json([
-        'reply' => 'Lỗi gọi Gemini API',
-        'status' => $response->status(),
-        'error' => $response->json(),
-        'body' => $response->body(),
-        'api_key_exists' => $apiKey ? true : false,
-        'model' => $model,
-    ], 500);
-}
+            if (!$response->successful()) {
+                Log::error('Gemini API Error', [
+                    'status' => $response->status(),
+                    'error' => $response->json(),
+                    'body' => $response->body(),
+                    'model' => $model,
+                    'api_key_exists' => !empty($apiKey),
+                ]);
 
-        $reply = $response->json('candidates.0.content.parts.0.text')
-            ?? 'Xin lỗi, tôi chưa trả lời được câu hỏi này.';
+                return response()->json([
+                    'reply' => 'Mèo AI hiện chưa phản hồi được. Bạn vui lòng thử lại sau ít phút.'
+                ], 200);
+            }
 
-        return response()->json([
-            'reply' => $reply
-        ]);
+            $reply = $response->json('candidates.0.content.parts.0.text')
+                ?? 'Xin lỗi, tôi chưa trả lời được câu hỏi này.';
+
+            return response()->json([
+                'reply' => $reply
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Gemini API Exception', [
+                'message' => $e->getMessage(),
+                'model' => $model,
+                'api_key_exists' => !empty($apiKey),
+            ]);
+
+            return response()->json([
+                'reply' => 'Mèo AI hiện đang gặp sự cố kết nối. Bạn vui lòng thử lại sau.'
+            ], 200);
+        }
     }
-
 }

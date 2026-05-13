@@ -7,7 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\SearchHistory;
+use App\Models\CourseProgress;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -54,4 +55,13 @@ class User extends Authenticatable
 {
     return $this->hasMany(CourseUser::class);
 }
+    public function searchHistories()
+    {
+        return $this->hasMany(SearchHistory::class);
+    }
+
+    public function courseProgress()
+    {
+        return $this->hasMany(CourseProgress::class);
+    }
 }

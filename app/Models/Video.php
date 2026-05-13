@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CourseProgress;
+use App\Models\Course;
 
 class Video extends Model
 {
@@ -22,4 +24,10 @@ class Video extends Model
     {
         return $this->belongsTo(Course::class);
     }
+    public function progress()
+{
+    return $this->hasMany(CourseProgress::class);
+}
+
+
 }

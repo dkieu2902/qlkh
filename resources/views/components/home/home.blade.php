@@ -385,8 +385,8 @@
                     <ion-icon name="code-slash"></ion-icon>
                 </div>
                 <div class="feature-content">
-                    <h3>Làm bài tập và thực hành</h3>
-                    <p>Luyện kỹ năng lập trình thông qua bài tập, giảng viên chấm điểm, đánh giá và hướng dẫn.</p>
+                    <h3>Nội dung cập nhật liên tục</h3>
+                    <p>Bài giảng và tài liệu được bổ sung thường xuyên để phù hợp xu hướng mới..</p>
                 </div>
             </div>
 

@@ -19,20 +19,21 @@
 
         :root {
             --primary: #0875ff;
-            --primary-dark: #075fe4;
+            --primary-dark: #075ccf;
             --success: #16a34a;
             --danger: #dc2626;
+            --warning: #f59e0b;
             --text: #0f172a;
             --muted: #64748b;
             --border: #e2e8f0;
-            --shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+            --bg: #eef3f8;
+            --card: #ffffff;
+            --shadow: 0 18px 45px rgba(31, 65, 114, 0.14);
         }
 
         body {
             font-family: 'Inter', Arial, sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(8, 117, 255, 0.12), transparent 35%),
-                linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
+            background: var(--bg);
             color: var(--text);
             min-height: 100vh;
         }
@@ -42,98 +43,110 @@
             color: inherit;
         }
 
+        button {
+            font-family: inherit;
+        }
+
         .hidden {
             display: none !important;
         }
 
+        .page-bg {
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(245, 249, 255, 0.68) 0%,
+                    rgba(245, 249, 255, 0.78) 42%,
+                    #eef3f8 42%,
+                    #eef3f8 100%
+                ),
+                url("/images/nen2.jpg") center top / 100% 42% no-repeat;
+        }
+
+        /* HEADER GIỐNG TRANG HOME */
         .navbar {
             width: 100%;
-            height: 76px;
-            background: #ffffff;
-            border-bottom: 1px solid #d9dee8;
+            height: 74px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            position: sticky;
+            top: 0;
             z-index: 999999;
         }
 
         .nav-inner {
-            width: 1020px;
-            max-width: calc(100% - 40px);
+            width: 1180px;
+            max-width: calc(100% - 80px);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 34px;
             font-weight: 800;
-            letter-spacing: -0.8px;
-            color: #111827;
-        }
-
-        .logo span {
-            color: #075fe4;
+            color: #075ccf;
+            letter-spacing: -1px;
         }
 
         .menu {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 22px;
         }
 
         .menu a {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            padding: 14px 22px;
-            border-radius: 8px;
-            transition: 0.2s;
-            color: #111827;
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: 0.2s ease;
         }
 
         .menu a.active,
         .menu a:hover {
-            background: #0875ff;
-            color: #ffffff;
-            box-shadow: 0 5px 12px rgba(8, 117, 255, 0.22);
+            background: #d9e9ff;
+            color: #075ccf;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .user-menu {
             position: relative;
-            display: inline-block;
         }
 
         .avatar {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: #0875ff;
-            color: #ffffff;
+            color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             font-weight: 800;
-            font-size: 18px;
+            box-shadow: 0 8px 18px rgba(8, 117, 255, 0.28);
         }
 
         .user-dropdown {
             position: absolute;
             right: 0;
-            top: 52px;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
+            top: 50px;
+            background: #fff;
+            border: 1px solid #ddd;
             border-radius: 10px;
-            width: 170px;
+            width: 180px;
             display: none;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
             z-index: 9999999;
             overflow: hidden;
         }
@@ -148,18 +161,19 @@
             background: none;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 600;
             color: #111827;
         }
 
         .user-dropdown a:hover,
         .user-dropdown button:hover {
-            background: #f3f6fb;
+            background: #f2f6ff;
         }
 
         .dark-mode {
-            background: #111827;
-            width: 42px;
-            height: 42px;
+            background: #06122b;
+            width: 38px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -167,14 +181,15 @@
         }
 
         .dark-mode ion-icon {
-            color: #ffffff;
-            font-size: 20px;
+            color: #fff;
+            font-size: 18px;
         }
 
+        /* LAYOUT */
         .container {
             width: 1220px;
             max-width: calc(100% - 40px);
-            margin: 42px auto 80px;
+            margin: 46px auto 80px;
             display: grid;
             grid-template-columns: minmax(0, 2fr) 380px;
             gap: 26px;
@@ -185,9 +200,9 @@
 
         .main-card,
         .side-card {
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(226, 232, 240, 0.95);
-            border-radius: 28px;
+            border-radius: 30px;
             box-shadow: var(--shadow);
             overflow: visible;
             backdrop-filter: blur(14px);
@@ -204,28 +219,29 @@
         }
 
         .course-hero {
-            padding: 28px;
+            padding: 30px;
         }
 
         .course-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
-            background: rgba(8, 117, 255, 0.09);
+            padding: 9px 14px;
+            background: #d9e9ff;
             color: var(--primary-dark);
             border-radius: 999px;
             font-size: 13px;
             font-weight: 900;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .course-title {
-            font-size: clamp(30px, 4vw, 46px);
+            font-size: clamp(31px, 4vw, 48px);
             font-weight: 900;
             line-height: 1.06;
             letter-spacing: -1.4px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+            color: #0f172a;
         }
 
         #id-img {
@@ -245,7 +261,7 @@
         }
 
         .content-section {
-            padding: 0 28px 30px;
+            padding: 0 30px 32px;
             overflow: visible;
             position: relative;
             z-index: 100;
@@ -254,7 +270,7 @@
         .divider {
             height: 1px;
             background: var(--border);
-            margin: 28px 0;
+            margin: 30px 0;
         }
 
         .section-title {
@@ -265,6 +281,7 @@
             font-weight: 900;
             letter-spacing: -0.5px;
             margin-bottom: 18px;
+            color: #0f172a;
         }
 
         .section-title ion-icon {
@@ -292,11 +309,12 @@
             border: 1px solid #fecaca;
         }
 
+        /* TABLE */
         .table-wrap {
             width: 100%;
             overflow: visible;
             border: 1px solid var(--border);
-            border-radius: 18px;
+            border-radius: 20px;
             background: #ffffff;
             position: relative;
             z-index: 200;
@@ -359,13 +377,6 @@
             width: 90px;
             text-align: center;
             vertical-align: middle;
-        }
-
-        .video-table,
-        .video-table tbody,
-        .video-table tr,
-        .video-table td {
-            overflow: visible;
         }
 
         .video-table tbody tr {
@@ -582,6 +593,7 @@
             text-align: center;
         }
 
+        /* USER INTRO */
         #gioi-thieu {
             display: grid;
             gap: 16px;
@@ -601,6 +613,7 @@
             font-weight: 900;
         }
 
+        /* SIDEBAR */
         .sidebar {
             position: sticky;
             top: 98px;
@@ -702,7 +715,7 @@
             gap: 9px;
             margin-top: 18px;
             padding: 12px 16px;
-            background: linear-gradient(135deg, #0875ff, #075fe4);
+            background: linear-gradient(135deg, #0875ff, #075ccf);
             color: #ffffff;
             border-radius: 15px;
             border: none;
@@ -775,6 +788,10 @@
                 display: none;
             }
 
+            .nav-inner {
+                max-width: calc(100% - 40px);
+            }
+
             .container {
                 max-width: calc(100% - 28px);
                 margin-top: 28px;
@@ -809,8 +826,12 @@
         }
 
         @media (max-width: 560px) {
-            .nav-inner {
-                max-width: calc(100% - 24px);
+            .navbar {
+                height: 68px;
+            }
+
+            .logo {
+                font-size: 26px;
             }
 
             .dark-mode {
@@ -841,294 +862,301 @@
 </head>
 
 <body>
-<header class="navbar">
-    <div class="nav-inner">
-        <div class="logo">Tech<span>School</span></div>
+<div class="page-bg">
 
-        <div class="menu">
-            <a href="/home" class="{{ request()->is('home') ? 'active' : '' }}">Trang chủ</a>
-            <a href="/courses" class="{{ request()->is('courses') ? 'active' : '' }}">Khóa học</a>
-            <a href="/introduction" class="{{ request()->is('introduction') ? 'active' : '' }}">Giới thiệu</a>
-            <a href="/clause" class="{{ request()->is('clause') ? 'active' : '' }}">Điều khoản</a>
-        </div>
+    <header class="navbar">
+        <div class="nav-inner">
+            <div class="logo">TechSchool</div>
 
-        <div class="nav-right">
-            <div class="user-menu">
-                <div class="avatar" onclick="toggleUserMenu(event)">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+            <div class="menu">
+                <a href="/home" class="{{ request()->is('home') ? 'active' : '' }}">Trang chủ</a>
+                <a href="/courses" class="{{ request()->is('courses') ? 'active' : '' }}">Khóa học</a>
+                <a href="/introduction" class="{{ request()->is('introduction') ? 'active' : '' }}">Giới thiệu</a>
+                <a href="/clause" class="{{ request()->is('clause') ? 'active' : '' }}">Điều khoản</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="user-menu">
+                    <div class="avatar" onclick="toggleUserMenu(event)">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+
+                    <div id="dropdownMenu" class="user-dropdown">
+                        <a href="
+                            @if(auth()->user()->role === 'user')
+                                {{ route('student.dashboard') }}
+                            @elseif(auth()->user()->role === 'admin')
+                                {{ route('teacher.dashboard') }}
+                            @else
+                                #
+                            @endif
+                        ">
+                            Thông tin cá nhân
+                        </a>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Đăng xuất</button>
+                        </form>
+                    </div>
                 </div>
 
-                <div id="dropdownMenu" class="user-dropdown">
-                    <a href="
-                        @if(auth()->user()->role === 'user')
-                            {{ route('student.dashboard') }}
-                        @elseif(auth()->user()->role === 'admin')
-                            {{ route('teacher.dashboard') }}
-                        @else
-                            #
-                        @endif
-                    ">
-                        Thông tin cá nhân
-                    </a>
+                <div class="dark-mode">
+                    <ion-icon name="moon-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </header>
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit">Đăng xuất</button>
-                    </form>
+    @php
+        $isApproved = auth()->check() && \Illuminate\Support\Facades\DB::table('course_user')
+            ->where('user_id', auth()->id())
+            ->where('course_id', $course->id)
+            ->where('status', 'approved')
+            ->exists();
+    @endphp
+
+    <main class="container">
+        <section class="main-card">
+            <div class="course-hero">
+                <div class="course-badge">
+                    <ion-icon name="school-outline"></ion-icon>
+                    Chi tiết khóa học
+                </div>
+
+                <h1 class="course-title">{{ $course->title }}</h1>
+
+                <div id="id-img">
+                    <img src="{{ asset($course->img_url) }}" alt="{{ $course->title }}">
                 </div>
             </div>
 
-            <div class="dark-mode">
-                <ion-icon name="moon-outline"></ion-icon>
-            </div>
-        </div>
-    </div>
-</header>
+            <div class="content-section">
+                <div class="divider"></div>
 
-@php
-    $isApproved = auth()->check() && \Illuminate\Support\Facades\DB::table('course_user')
-        ->where('user_id', auth()->id())
-        ->where('course_id', $course->id)
-        ->where('status', 'approved')
-        ->exists();
-@endphp
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <h2 class="section-title">
+                        <ion-icon name="videocam-outline"></ion-icon>
+                        Danh sách video bài học
+                    </h2>
 
-<main class="container">
-    <section class="main-card">
-        <div class="course-hero">
-            <div class="course-badge">
-                <ion-icon name="school-outline"></ion-icon>
-                Chi tiết khóa học
-            </div>
+                    @if(session('success'))
+                        <div class="success">{{ session('success') }}</div>
+                    @endif
 
-            <h1 class="course-title">{{ $course->title }}</h1>
+                    @if($course->videos->count() > 0)
+                        <div class="table-wrap">
+                            <table class="video-table">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Nội dung</th>
+                                    <th>Đường dẫn</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
 
-            <div id="id-img">
-                <img src="{{ asset($course->img_url) }}" alt="{{ $course->title }}">
-            </div>
-        </div>
+                                <tbody>
+                                @foreach($course->videos as $index => $video)
+                                    <tr id="row-{{ $video->id }}">
+                                        <td>{{ $index + 1 }}</td>
 
-        <div class="content-section">
-            <div class="divider"></div>
+                                        <td>
+                                            <span class="text" id="title-text-{{ $video->id }}">{{ $video->title }}</span>
+                                            <input class="edit-input hidden" id="title-input-{{ $video->id }}" value="{{ $video->title }}">
+                                        </td>
 
-            @if(auth()->check() && auth()->user()->role === 'admin')
-                <h2 class="section-title">
-                    <ion-icon name="videocam-outline"></ion-icon>
-                    Danh sách video bài học
-                </h2>
+                                        <td>
+                                            <span class="text" id="content-text-{{ $video->id }}">{{ $video->content }}</span>
+                                            <textarea class="edit-input hidden" id="content-input-{{ $video->id }}">{{ $video->content }}</textarea>
+                                        </td>
 
-                @if(session('success'))
-                    <div class="success">{{ session('success') }}</div>
-                @endif
+                                        <td>
+                                            <span class="text" id="url-text-{{ $video->id }}">{{ $video->video_url }}</span>
+                                            <input class="edit-input hidden" id="url-input-{{ $video->id }}" value="{{ $video->video_url }}">
+                                        </td>
 
-                @if($course->videos->count() > 0)
-                    <div class="table-wrap">
-                        <table class="video-table">
-                            <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tiêu đề</th>
-                                <th>Nội dung</th>
-                                <th>Đường dẫn</th>
-                                <th>Hành động</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            @foreach($course->videos as $index => $video)
-                                <tr id="row-{{ $video->id }}">
-                                    <td>{{ $index + 1 }}</td>
-
-                                    <td>
-                                        <span class="text" id="title-text-{{ $video->id }}">{{ $video->title }}</span>
-                                        <input class="edit-input hidden" id="title-input-{{ $video->id }}" value="{{ $video->title }}">
-                                    </td>
-
-                                    <td>
-                                        <span class="text" id="content-text-{{ $video->id }}">{{ $video->content }}</span>
-                                        <textarea class="edit-input hidden" id="content-input-{{ $video->id }}">{{ $video->content }}</textarea>
-                                    </td>
-
-                                    <td>
-                                        <span class="text" id="url-text-{{ $video->id }}">{{ $video->video_url }}</span>
-                                        <input class="edit-input hidden" id="url-input-{{ $video->id }}" value="{{ $video->video_url }}">
-                                    </td>
-
-                                    <td>
-                                        <div class="action-menu" id="action-{{ $video->id }}">
-                                            <button onclick="toggleVideoMenu({{ $video->id }}, event)" class="menu-btn" id="btn-{{ $video->id }}">
-                                                <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-                                            </button>
-
-                                            <div class="action-dropdown hidden" id="menu-{{ $video->id }}">
-                                                <a href="{{ route('videos.watch', [$course->id, $video->id]) }}" class="view">
-                                                    <ion-icon name="eye-outline"></ion-icon> Xem
-                                                </a>
-
-                                                <button onclick="editVideo({{ $video->id }})" class="edit">
-                                                    <ion-icon name="construct-outline"></ion-icon> Sửa
+                                        <td>
+                                            <div class="action-menu" id="action-{{ $video->id }}">
+                                                <button onclick="toggleVideoMenu({{ $video->id }}, event)" class="menu-btn" id="btn-{{ $video->id }}">
+                                                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                                                 </button>
 
-                                                <form action="{{ route('videos.destroy', $video->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="delete">
-                                                        <ion-icon name="trash-outline"></ion-icon> Xóa
+                                                <div class="action-dropdown hidden" id="menu-{{ $video->id }}">
+                                                    <a href="{{ route('videos.watch', [$course->id, $video->id]) }}" class="view">
+                                                        <ion-icon name="eye-outline"></ion-icon> Xem
+                                                    </a>
+
+                                                    <button onclick="editVideo({{ $video->id }})" class="edit">
+                                                        <ion-icon name="construct-outline"></ion-icon> Sửa
                                                     </button>
-                                                </form>
+
+                                                    <form action="{{ route('videos.destroy', $video->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="delete">
+                                                            <ion-icon name="trash-outline"></ion-icon> Xóa
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    <div class="empty-box">
-                        Chưa có video nào trong khóa học này.
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @else
+                        <div class="empty-box">
+                            Chưa có video nào trong khóa học này.
+                        </div>
+                    @endif
+                @endif
+
+                @if(auth()->check() && auth()->user()->role === 'user')
+                    <h2 class="section-title">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        Giới thiệu khóa học
+                    </h2>
+
+                    <div id="gioi-thieu">
+                        <p>
+                            Khóa học cung cấp kiến thức nền tảng và kỹ năng thực tế trong lĩnh vực IT, giúp học viên xây dựng tư duy công nghệ bài bản.
+                        </p>
+                        <p>
+                            Học viên được làm quen với quy trình làm việc, công cụ chuyên ngành và phương pháp giải quyết vấn đề trong thực tế.
+                        </p>
+                        <p>
+                           Nội dung học kết hợp giữa lý thuyết và thực hành dự án, giúp nâng cao kỹ năng và khả năng ứng dụng sau khóa học.
+                        </p>
+                        <p>
+                           Khóa học phù hợp cho người mới bắt đầu, sinh viên hoặc người muốn nâng cao kiến thức để phát triển trong ngành công nghệ thông tin.
+                        </p>
+
+                        <h3>Phương thức học:</h3>
+                        <p>
+                            Học trực tuyến yêu cầu học viên phải kết nối và xem live stream bài giảng, trao đổi trực tiếp với giảng viên. Sau khi học live stream, các học viên có video để xem lại bất kỳ lúc nào. Học viên phải làm bài tập được giao một cách đầy đủ.
+                        </p>
+
+                        <h3>Thời gian học:</h3>
+                        <p>
+                            Mỗi tuần 3 buổi vào các tối thứ 2, thứ 4 và thứ 6, mỗi buổi khoảng 2 tiếng.
+                        </p>
+                        <p>
+                            Với lượng kiến thức cần truyền tải là rất lớn, tổng thời gian khóa học dự kiến là 11 tháng, thời gian này có thể bị kéo dài ra nếu học viên vẫn chưa tiếp thu đủ kiến thức.
+                        </p>
                     </div>
                 @endif
-            @endif
-
-            @if(auth()->check() && auth()->user()->role === 'user')
-                <h2 class="section-title">
-                    <ion-icon name="document-text-outline"></ion-icon>
-                    Giới thiệu khóa học
-                </h2>
-
-                <div id="gioi-thieu">
-                    <p>
-                        Nếu học viên đã học sơ qua về lập trình web, khóa học này là cơ hội để hệ thống hóa kiến thức, học lại một cách bài bản, bù các kiến thức bị thiếu. Bởi vì chỉ cần "một cuốn sách, một người thầy" là đủ.
-                    </p>
-                    <p>
-                        Khóa học cung cấp các kiến thức căn bản để học viên có thể đi làm được ở vị trí fullstack web developer. Học viên học được cách làm việc nhóm, giải quyết vấn đề, hiểu được quy trình, công cụ làm việc như trong thực tế.
-                    </p>
-                    <p>
-                        Khóa học dành cho các học viên có kiến thức lập trình căn bản, quyết tâm học để đi làm.
-                    </p>
-                    <p>
-                        Học viên có một người mentor bên cạnh, như một người bạn, sẵn sàng chia sẻ định hướng để phát triển bản thân trong ngành lập trình.
-                    </p>
-
-                    <h3>Phương thức học:</h3>
-                    <p>
-                        Học trực tuyến yêu cầu học viên phải kết nối và xem live stream bài giảng, trao đổi trực tiếp với giảng viên. Sau khi học live stream, các học viên có video để xem lại bất kỳ lúc nào. Học viên phải làm bài tập được giao một cách đầy đủ.
-                    </p>
-
-                    <h3>Thời gian học:</h3>
-                    <p>
-                        Mỗi tuần 3 buổi vào các tối thứ 2, thứ 4 và thứ 6, mỗi buổi khoảng 2 tiếng.
-                    </p>
-                    <p>
-                        Với lượng kiến thức cần truyền tải là rất lớn, tổng thời gian khóa học dự kiến là 11 tháng, thời gian này có thể bị kéo dài ra nếu học viên vẫn chưa tiếp thu đủ kiến thức.
-                    </p>
-                </div>
-            @endif
-        </div>
-    </section>
-
-    <aside class="sidebar">
-        <div class="side-card">
-            <div class="teacher-box">
-                <div class="teacher-avatar">M</div>
-
-                <div class="teacher-info">
-                    <span>Giáo viên</span>
-                    <strong>Lã Dương Kiêu</strong>
-                </div>
             </div>
+        </section>
 
-            <div class="price-card">
-                <span>Học phí</span>
-                <strong>{{ number_format($course->price, 0, ',', '.') }}đ</strong>
-            </div>
+        <aside class="sidebar">
+            <div class="side-card">
+                <div class="teacher-box">
+                    <div class="teacher-avatar">M</div>
 
-            <div class="feature-list">
-                <div class="card-1">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    <p>Đăng ký một lần, học trọn đời</p>
+                    <div class="teacher-info">
+                        <span>Giáo viên</span>
+                        <strong>Lã Dương Kiêu</strong>
+                    </div>
                 </div>
 
-                <div class="card-1">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    <p>Nộp và xem đánh giá bài tập của giáo viên</p>
+                <div class="price-card">
+                    <span>Học phí</span>
+                    <strong>{{ number_format($course->price, 0, ',', '.') }}đ</strong>
                 </div>
 
-                <div class="card-1">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    <p>Truy cập bài viết dành cho học viên</p>
+                <div class="feature-list">
+                    <div class="card-1">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <p>Đăng ký một lần, học trọn đời</p>
+                    </div>
+
+                    <div class="card-1">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <p>Nộp và xem đánh giá bài tập của giáo viên</p>
+                    </div>
+
+                    <div class="card-1">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <p>Truy cập bài viết dành cho học viên</p>
+                    </div>
+
+                    <div class="card-1">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <p>Nhận hỏi đáp và hỗ trợ</p>
+                    </div>
                 </div>
 
-                <div class="card-1">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    <p>Nhận hỏi đáp và hỗ trợ</p>
-                </div>
-            </div>
-
-            @if(auth()->check() && auth()->user()->role === 'admin')
-                <a href="{{ route('videos.learn', $course->id) }}" class="btn">
-                    <ion-icon name="play-circle-outline"></ion-icon>
-                    Vào học
-                </a>
-            @elseif(auth()->check() && auth()->user()->role === 'user')
-                @if($isApproved)
+                @if(auth()->check() && auth()->user()->role === 'admin')
                     <a href="{{ route('videos.learn', $course->id) }}" class="btn">
                         <ion-icon name="play-circle-outline"></ion-icon>
                         Vào học
                     </a>
-                @else
-                    <span class="btn btn-disabled">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        Vào học
-                    </span>
+                @elseif(auth()->check() && auth()->user()->role === 'user')
+                    @if($isApproved)
+                        <a href="{{ route('videos.learn', $course->id) }}" class="btn">
+                            <ion-icon name="play-circle-outline"></ion-icon>
+                            Vào học
+                        </a>
+                    @else
+                        <span class="btn btn-disabled">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            Vào học
+                        </span>
+                    @endif
                 @endif
-            @endif
-        </div>
-
-        @if(auth()->check() && auth()->user()->role === 'admin')
-            <div class="side-card">
-                <h2 class="section-title">
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                    Thêm video mới
-                </h2>
-
-                @if($errors->any())
-                    <div class="error">
-                        @foreach($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <form action="{{ route('videos.store', $course->id) }}" method="POST">
-                    @csrf
-
-                    <label>Tiêu đề video</label>
-                    <input type="text" name="title" placeholder="Nhập tiêu đề video">
-
-                    <label>Nội dung video</label>
-                    <textarea name="content" rows="4" placeholder="Nhập mô tả nội dung video"></textarea>
-
-                    <label>Link video</label>
-                    <input type="text" name="video_url" placeholder="https://www.youtube.com/embed/xxxx">
-
-                    <button type="submit" class="btn">
-                        <ion-icon name="cloud-upload-outline"></ion-icon>
-                        Thêm video
-                    </button>
-                </form>
             </div>
-        @endif
-    </aside>
-</main>
+
+            @if(auth()->check() && auth()->user()->role === 'admin')
+                <div class="side-card">
+                    <h2 class="section-title">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        Thêm video mới
+                    </h2>
+
+                    @if($errors->any())
+                        <div class="error">
+                            @foreach($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <form action="{{ route('videos.store', $course->id) }}" method="POST">
+                        @csrf
+
+                        <label>Tiêu đề video</label>
+                        <input type="text" name="title" placeholder="Nhập tiêu đề video">
+
+                        <label>Nội dung video</label>
+                        <textarea name="content" rows="4" placeholder="Nhập mô tả nội dung video"></textarea>
+
+                        <label>Link video</label>
+                        <input type="text" name="video_url" placeholder="https://www.youtube.com/embed/xxxx">
+
+                        <button type="submit" class="btn">
+                            <ion-icon name="cloud-upload-outline"></ion-icon>
+                            Thêm video
+                        </button>
+                    </form>
+                </div>
+            @endif
+        </aside>
+    </main>
+
+</div>
 
 <script>
     function toggleUserMenu(e) {
         e.stopPropagation();
 
         const menu = document.getElementById('dropdownMenu');
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+
+        if (menu) {
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
     }
 
     function toggleVideoMenu(id, e) {
@@ -1146,6 +1174,8 @@
 
         const currentMenu = document.getElementById('menu-' + id);
         const currentRow = document.getElementById('row-' + id);
+
+        if (!currentMenu || !currentRow) return;
 
         currentMenu.classList.toggle('hidden');
 
@@ -1235,5 +1265,7 @@
         }
     });
 </script>
+
+@include('components.ai-chat')
 </body>
 </html>

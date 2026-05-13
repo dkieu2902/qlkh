@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\CourseProgress;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
@@ -31,4 +32,10 @@ class Course extends Model
     {
         return $this->hasMany(CourseUser::class);
     }
+
+    public function progress()
+{
+    return $this->hasMany(CourseProgress::class);
+
+}
 }

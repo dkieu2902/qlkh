@@ -12,51 +12,54 @@
         position: fixed;
         right: 24px;
         bottom: 24px;
-        width: 66px;
-        height: 66px;
+        width: 70px;
+        height: 70px;
         border-radius: 24px;
-        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        background: linear-gradient(135deg, #f97316, #ef4444, #7c2d12);
         border: none;
         cursor: pointer;
-        box-shadow: 0 22px 45px rgba(37, 99, 235, 0.38);
+        box-shadow: 0 22px 45px rgba(239, 68, 68, 0.35);
         z-index: 99999;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: 0.25s ease;
+        overflow: hidden;
+        padding: 6px;
     }
 
     .ai-chat-button:hover {
-        transform: translateY(-4px) scale(1.03);
+        transform: translateY(-4px) scale(1.04);
     }
 
     .ai-chat-button img {
-        width: 38px;
-        height: 38px;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
         object-fit: cover;
     }
 
     .ai-chat-box {
         position: fixed;
         right: 24px;
-        bottom: 104px;
-        width: 410px;
-        height: 590px;
-        background: rgba(255, 255, 255, 0.96);
+        bottom: 108px;
+        width: 420px;
+        height: 600px;
+        background: rgba(255,255,255,0.97);
         backdrop-filter: blur(18px);
-        border-radius: 30px;
+        border-radius: 32px;
         overflow: hidden;
         display: none;
         flex-direction: column;
         z-index: 99999;
-        border: 1px solid rgba(226, 232, 240, 0.95);
-        box-shadow: 0 32px 85px rgba(15, 23, 42, 0.28);
+        border: 1px solid rgba(226,232,240,0.95);
+        box-shadow: 0 34px 90px rgba(15,23,42,0.28);
     }
 
     .ai-chat-header {
         background:
-            radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 35%),
-            linear-gradient(135deg, #2563eb, #4f46e5 55%, #7c3aed);
+            radial-gradient(circle at top left, rgba(255,255,255,0.26), transparent 35%),
+            linear-gradient(135deg, #f97316, #ef4444 55%, #7c2d12);
         padding: 18px;
         display: flex;
         align-items: center;
@@ -71,13 +74,14 @@
     }
 
     .ai-header-avatar {
-        width: 54px;
-        height: 54px;
-        border-radius: 18px;
+        width: 58px;
+        height: 58px;
+        border-radius: 20px;
         overflow: hidden;
-        border: 2px solid rgba(255, 255, 255, 0.22);
-        background: rgba(255, 255, 255, 0.14);
+        border: 2px solid rgba(255,255,255,0.28);
+        background: rgba(255,255,255,0.16);
         flex-shrink: 0;
+        box-shadow: 0 12px 26px rgba(15,23,42,0.16);
     }
 
     .ai-header-avatar img {
@@ -87,7 +91,7 @@
     }
 
     .ai-chat-info h2 {
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 900;
         line-height: 1.2;
         margin-bottom: 4px;
@@ -95,7 +99,7 @@
 
     .ai-chat-info p {
         font-size: 12px;
-        opacity: 0.86;
+        opacity: 0.9;
         font-weight: 600;
     }
 
@@ -104,7 +108,7 @@
         height: 38px;
         border-radius: 14px;
         border: none;
-        background: rgba(255, 255, 255, 0.16);
+        background: rgba(255,255,255,0.16);
         color: white;
         font-size: 24px;
         cursor: pointer;
@@ -112,7 +116,7 @@
     }
 
     .ai-chat-close:hover {
-        background: rgba(255, 255, 255, 0.26);
+        background: rgba(255,255,255,0.28);
         transform: rotate(90deg);
     }
 
@@ -121,7 +125,8 @@
         padding: 18px;
         overflow-y: auto;
         background:
-            radial-gradient(circle at top right, rgba(37, 99, 235, 0.08), transparent 30%),
+            radial-gradient(circle at top right, rgba(249,115,22,0.12), transparent 30%),
+            radial-gradient(circle at bottom left, rgba(239,68,68,0.09), transparent 34%),
             #f8fafc;
     }
 
@@ -150,14 +155,14 @@
     }
 
     .message-avatar {
-        width: 34px;
-        height: 34px;
-        border-radius: 12px;
+        width: 38px;
+        height: 38px;
+        border-radius: 14px;
         overflow: hidden;
-        flex: 0 0 34px;
-        background: #e2e8f0;
+        flex: 0 0 38px;
+        background: #ffffff;
         border: 1px solid #e5e7eb;
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 8px 18px rgba(15,23,42,0.09);
     }
 
     .message-avatar img {
@@ -167,10 +172,10 @@
     }
 
     .user-letter-avatar {
-        width: 34px;
-        height: 34px;
-        border-radius: 12px;
-        flex: 0 0 34px;
+        width: 38px;
+        height: 38px;
+        border-radius: 14px;
+        flex: 0 0 38px;
         background: linear-gradient(135deg, #0f172a, #334155);
         color: #ffffff;
         display: flex;
@@ -178,13 +183,13 @@
         justify-content: center;
         font-size: 13px;
         font-weight: 900;
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+        box-shadow: 0 8px 18px rgba(15,23,42,0.14);
     }
 
     .message {
-        max-width: 76%;
+        max-width: 74%;
         padding: 13px 15px;
-        border-radius: 20px;
+        border-radius: 21px;
         font-size: 14px;
         line-height: 1.6;
         white-space: pre-wrap;
@@ -192,18 +197,18 @@
     }
 
     .message.ai {
-        background: white;
+        background: #ffffff;
         color: #0f172a;
         border: 1px solid #e2e8f0;
-        border-bottom-left-radius: 6px;
-        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+        border-bottom-left-radius: 7px;
+        box-shadow: 0 10px 24px rgba(15,23,42,0.06);
     }
 
     .message.user {
-        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        background: linear-gradient(135deg, #ef4444, #f97316);
         color: white;
-        border-bottom-right-radius: 6px;
-        box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+        border-bottom-right-radius: 7px;
+        box-shadow: 0 12px 24px rgba(239,68,68,0.22);
     }
 
     .ai-chat-form {
@@ -218,7 +223,7 @@
     .ai-chat-input {
         flex: 1;
         height: 48px;
-        border-radius: 16px;
+        border-radius: 17px;
         border: 1px solid #dbe3ef;
         background: #f8fafc;
         padding: 0 16px;
@@ -229,16 +234,16 @@
 
     .ai-chat-input:focus {
         background: white;
-        border-color: #2563eb;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        border-color: #f97316;
+        box-shadow: 0 0 0 4px rgba(249,115,22,0.14);
     }
 
     .ai-chat-send {
         width: 48px;
         height: 48px;
         border: none;
-        border-radius: 16px;
-        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        border-radius: 17px;
+        background: linear-gradient(135deg, #f97316, #ef4444);
         color: white;
         cursor: pointer;
         flex-shrink: 0;
@@ -248,45 +253,45 @@
 
     .ai-chat-send:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 26px rgba(37, 99, 235, 0.28);
+        box-shadow: 0 14px 26px rgba(239,68,68,0.28);
     }
 
     @media (max-width: 480px) {
         .ai-chat-box {
             width: calc(100% - 20px);
             right: 10px;
-            bottom: 88px;
+            bottom: 92px;
             height: 72vh;
-            border-radius: 24px;
+            border-radius: 26px;
         }
 
         .ai-chat-button {
             right: 14px;
             bottom: 14px;
-            width: 58px;
-            height: 58px;
-            border-radius: 20px;
+            width: 62px;
+            height: 62px;
+            border-radius: 22px;
         }
 
         .message {
-            max-width: 74%;
+            max-width: 72%;
         }
     }
 </style>
 
 <button class="ai-chat-button" onclick="toggleAIChat()" type="button">
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="AI">
+    <img src="{{ asset('images/cat-ai.png') }}" alt="Cat AI">
 </button>
 
 <div class="ai-chat-box" id="aiChatBox">
     <div class="ai-chat-header">
         <div class="ai-chat-header-left">
             <div class="ai-header-avatar">
-                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="AI Avatar">
+                <img src="{{ asset('images/cat-ai.png') }}" alt="Cat AI Avatar">
             </div>
 
             <div class="ai-chat-info">
-                <h2>AI tư vấn khóa học</h2>
+                <h2>Mèo AI tư vấn khóa học</h2>
                 <p>Hỗ trợ học tập thông minh</p>
             </div>
         </div>
@@ -297,7 +302,7 @@
     <div class="ai-chat-messages" id="aiChatMessages">
         <div class="message-row ai">
             <div class="message-avatar">
-                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="AI">
+                <img src="{{ asset('images/cat-ai.png') }}" alt="Cat AI">
             </div>
 
             <div class="message ai">
@@ -324,7 +329,7 @@
 </div>
 
 <script>
-    const AI_AVATAR_URL = 'https://cdn-icons-png.flaticon.com/512/4712/4712109.png';
+    const AI_AVATAR_URL = "{{ asset('images/cat-ai.png') }}";
     const USER_INITIAL = "{{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 1)) }}";
 
     function toggleAIChat() {
@@ -352,7 +357,7 @@
 
         aiChatInput.value = '';
 
-        const loading = appendMessage('AI đang trả lời...', 'ai');
+        const loading = appendMessage('Mèo AI đang trả lời...', 'ai');
 
         try {
             const response = await fetch("{{ route('ai.chat') }}", {
@@ -369,7 +374,7 @@
             const data = await response.json();
 
             loading.querySelector('.message').textContent =
-                data.reply ?? 'AI chưa có phản hồi.';
+                data.reply ?? 'Mèo AI chưa có phản hồi.';
 
         } catch (error) {
             loading.querySelector('.message').textContent =
@@ -393,7 +398,7 @@
 
             const img = document.createElement('img');
             img.src = AI_AVATAR_URL;
-            img.alt = 'AI';
+            img.alt = 'Cat AI';
 
             avatar.appendChild(img);
             row.appendChild(avatar);
